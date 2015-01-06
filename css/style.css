@@ -1,12 +1,13 @@
 *{
-    padding:0;
-    margin:0;
-    font-family: 'Roboto', sans-serif;
+    padding: 0;
+    margin: 0;
+    font-size: 20px;
+    font-family: 'Bree Serif', serif;
 }
 
 
 
-.education-entry, .work-entry, .project-entry {
+.education-entry, .work-entry, .project-entry, .online-entry {
   padding-left: 5%;
   padding-right: 5%;
 }
@@ -51,7 +52,7 @@ h2, h3, h4, h5 {
 
 .date-text {
   font-style: italic;
-  font-size: 14px;
+  font-size: 16px;
   color: #999999;
   line-height: 16px;
   float: left;
@@ -59,7 +60,7 @@ h2, h3, h4, h5 {
 
 .location-text {
   font-style: italic;
-  font-size: 14px;
+  font-size: 16px;
   color: #999999;
   line-height: 16px;
   float: right;
@@ -67,9 +68,9 @@ h2, h3, h4, h5 {
 }
 
 p {
-  font-size: 14px;
+  font-size: 16px;
   color: #333333;
-  line-height: 21px;
+  line-height: 24px;
 }
 
 a {
@@ -118,7 +119,6 @@ a {
   background-color: #4A4A4A;
 }
 
-/* TODO: Replace with image later */
 #header {
   background-color: #484848;
 }
@@ -146,6 +146,7 @@ ul {
   padding: 10px;
   width: 200px;
   display: none;
+  margin-right: 20px;
 }
 
 img {
@@ -216,4 +217,75 @@ span {
   .biopic {
     display: block;
   }
+}
+
+/* Online Classes */
+
+.online {
+  display: flex;
+  flex-wrap: wrap;
+}
+.online-entry {
+  width: 50%;
+  margin-bottom: 25px;
+  padding: 0px;
+  text-align: center;
+  float: none !important;
+}
+
+.online-url {
+  font-size: 18px;
+  margin-top: 0;
+}
+
+.online-date {
+  font-style: italic;
+  font-size: 16px;
+  color: #999999;
+}
+
+/* Skills Chart */
+
+#chartContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#chartSvg {
+  width: 800px;
+}
+
+/* Force Chart Elements */
+.node {
+  cursor: pointer;
+}
+.skill {
+  fill: blue;
+}
+
+.project {
+  fill: green;
+}
+
+.line {
+  stroke: #ccc;
+  stroke-width: 2;
+}
+
+/* Chart Description */
+#nodeDescription {
+  color: white;
+  font-size: 24px;
+}
+
+#chartNode {
+  margin-bottom: 30px;
+}
+
+.chart-link {
+  margin: 20px;
+}
+
+.chart-name {
+  color: red;
 }
