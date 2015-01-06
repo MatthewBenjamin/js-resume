@@ -42,12 +42,9 @@ bio.display = function() {
     $("#skills").append(formattedSkills);
     }
     
-    var displayFooterContacts = function () {
-        $("#footerContacts").append(formattedEmail)
-                            .append(formattedMobile);
-    }
-
-    displayFooterContacts();
+    //let's connect
+    $("#footerContacts").append(formattedEmail)
+                        .append(formattedMobile);
 }
 
 var projects = {
@@ -74,20 +71,20 @@ var projects = {
 };
 
 projects.display = function() {
-    for (p in projects.projects) {
+    for (project in projects.projects) {
         $("#projects").append(HTMLprojectStart);
 
-        var formattedProjectTitle = HTMLprojectTitle.replace("%data%", projects.projects[p].title);
+        var formattedProjectTitle = HTMLprojectTitle.replace("%data%", projects.projects[project].title);
         $(".project-entry:last").append(formattedProjectTitle);
 
-        var formattedProjectDates = HTMLprojectDates.replace("%data%", projects.projects[p].dates);
+        var formattedProjectDates = HTMLprojectDates.replace("%data%", projects.projects[project].dates);
         $(".project-entry:last").append(formattedProjectDates);
 
-        var formattedProjectDescription = HTMLprojectDescription.replace("%data%", projects.projects[p].description);
+        var formattedProjectDescription = HTMLprojectDescription.replace("%data%", projects.projects[project].description);
         $(".project-entry:last").append(formattedProjectDescription);
 
-        for (image in projects.projects[p].images) {
-            var formattedProjectImage = HTMLprojectImage.replace("%data%", projects.projects[p].images[image]);
+        for (image in projects.projects[project].images) {
+            var formattedProjectImage = HTMLprojectImage.replace("%data%", projects.projects[project].images[image]);
             $(".project-entry:last").append(formattedProjectImage);
         }
     }
@@ -147,55 +144,42 @@ var education = {
 education.display = function() {
 
     //display formal education
-    var displaySchools = function () {
+    for (school in education.schools) {
+        var formattedSchool = HTMLschoolName.replace("%data%", education.schools[school].name);
+        var formattedDegree = HTMLschoolDegree.replace("%data%", education.schools[school].degree);
+        var formattedSchoolDegree = formattedSchool + formattedDegree;        
+        var formattedDates = HTMLschoolDates.replace("%data%", education.schools[school].dates);
+        var formattedLocation = HTMLschoolLocation.replace("%data%", education.schools[school].location);
+        
+        $("#education").append(HTMLschoolStart)//;
+        $(".education-entry:last").append(formattedSchoolDegree.replace("#", education.schools[school].url));
+        $(".education-entry:last").append(formattedDates);
+        $(".education-entry:last").append(formattedLocation);
 
-        for (school in education.schools) {
-            var formattedSchool = HTMLschoolName.replace("%data%", education.schools[school].name);
-            var formattedDegree = HTMLschoolDegree.replace("%data%", education.schools[school].degree);
-            var formattedSchoolDegree = formattedSchool + formattedDegree;        
-            var formattedDates = HTMLschoolDates.replace("%data%", education.schools[school].dates);
-            var formattedLocation = HTMLschoolLocation.replace("%data%", education.schools[school].location);
-            
-            $("#education").append(HTMLschoolStart)//;
-            $(".education-entry:last").append(formattedSchoolDegree.replace("#", education.schools[school].url));
-            $(".education-entry:last").append(formattedDates);
-            $(".education-entry:last").append(formattedLocation);
-
-            for(major in education.schools[school].majors) {
-                var formattedMajor = HTMLschoolMajor.replace("%data%", education.schools[school].majors[major]);
-                $(".education-entry:last").append(formattedMajor);
-            }
+        for(major in education.schools[school].majors) {
+            var formattedMajor = HTMLschoolMajor.replace("%data%", education.schools[school].majors[major]);
+            $(".education-entry:last").append(formattedMajor);
         }
     }
 
     //display online courses
-    var displayOnlineCourses = function () {
-        $("#education").append(HTMLonlineClasses);
-        $("#education").append(HTMLonlineContainer);
+    $("#education").append(HTMLonlineClasses);
+    $("#education").append(HTMLonlineContainer);
 
-        for (course in education.onlineCourses) {
-            //$("#education").append(HTMLschoolStart);
-            var formattedTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[course].title);
-            formattedTitle = formattedTitle.replace("#", education.onlineCourses[course].url);
-            var formattedSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[course].school);
-            var formattedTitleSchool = formattedTitle + formattedSchool;
-            var formattedDate = HTMLonlineDates.replace("%data%", education.onlineCourses[course].date);
-            var formattedURL = HTMLonlineURL.replace("%data%", education.onlineCourses[course].url);
+    for (course in education.onlineCourses) {
+        //$("#education").append(HTMLschoolStart);
+        var formattedTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[course].title);
+        formattedTitle = formattedTitle.replace("#", education.onlineCourses[course].url);
+        var formattedSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[course].school);
+        var formattedTitleSchool = formattedTitle + formattedSchool;
+        var formattedDate = HTMLonlineDates.replace("%data%", education.onlineCourses[course].date);
+        var formattedURL = HTMLonlineURL.replace("%data%", education.onlineCourses[course].url);
 
-            $(".online").append(HTMLonlineStart);
-            $(".online-entry:last").append(formattedTitleSchool);
-            $(".online-entry:last").append(formattedDate);
-            $(".online-entry:last").append(formattedURL);
-
-            //$(".education-entry:last").append("<hr>"); TODO - make this the same length as the URL (or set pixels)
-            //consider if adding this somewhere else (CSS?) is more appropriate, OR develop another CSS class for online
-            //classes that will help separate the online classes (and personalize the resume) (slightly different color
-            // from background to have each div pop out?)
-        }
+        $(".online").append(HTMLonlineStart);
+        $(".online-entry:last").append(formattedTitleSchool);
+        $(".online-entry:last").append(formattedDate);
+        $(".online-entry:last").append(formattedURL);
     }
-
-    displaySchools();
-    displayOnlineCourses();
 }
 
 var work = {
@@ -234,6 +218,7 @@ work.display = function(){
 
 //skills chart
 var skillsChart = {
+    
     //node and link data
     chartData : {
         nodes: [
@@ -286,7 +271,7 @@ skillsChart.display = function () {
             .attr("r", 50);
     }
 
-    //on mouseout, return to normal
+    //mouseout animation
     var nodeMouseout = function () {
         d3.select(this)
             .transition()
@@ -295,7 +280,7 @@ skillsChart.display = function () {
     }
 
     //when node is clicked, display node info and linked nodes in side div
-    //NOTE, HTML variables (e.g. HTMLchartNodeType, etc.), are located in helper.js
+    //HTML variables (e.g. HTMLchartNodeType, etc.), are located in helper.js
     var nodeClick = function(d)  {
         //header
         var chartDescTop = function (d) {
@@ -325,7 +310,7 @@ skillsChart.display = function () {
         var testType = findTestType(d);
         var printType = findPrintType(d);
 
-        //find linked nodes, display their info
+        //find links & display their info
         var displayInfo = function (link, printType) {
             var currentType = skillsChart.chartData.edges[link][printType].type;
             var currentName = skillsChart.chartData.edges[link][printType].name;
@@ -379,7 +364,6 @@ skillsChart.display = function () {
                    .append("line")
                    .attr("class", "line");
 
-    //TODO use g tag and append circles to that in order to add labels?
     //create node objects
     var nodes = svg.selectAll("circle")
                     .data(skillsChart.chartData.nodes)

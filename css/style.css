@@ -228,9 +228,8 @@ span {
 .online-entry {
   width: 50%;
   margin-bottom: 25px;
-  padding: 0px;
+  padding: 0;
   text-align: center;
-  float: none !important;
 }
 
 .online-url {
